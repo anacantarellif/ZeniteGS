@@ -23,7 +23,7 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      await setFlag('onboardingDone', false);
+      //await setFlag('onboardingDone', false);
 
       const flags = await getFlags();
       setInitialRoute(flags.onboardingDone ? 'Main' : 'Onboarding');
