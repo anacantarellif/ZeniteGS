@@ -17,15 +17,15 @@ function typeIcon(type: Message['type']) {
 }
 
 export default function TerraScreen() {
-  const [user, setUser]               = useState<User | null>(null);
-  const [missionDay, setMissionDay]   = useState(1);
-  const [delivered, setDelivered]     = useState<DeliveredMessage[]>([]);
+  const [user, setUser] = useState<User | null>(null);
+  const [missionDay, setMissionDay] = useState(1);
+  const [delivered, setDelivered] = useState<DeliveredMessage[]>([]);
   const [todayMessage, setTodayMessage] = useState<Message | null>(null);
-  const [selected, setSelected]       = useState<Message | null>(null);
+  const [selected, setSelected] = useState<Message | null>(null);
   const [sheetVisible, setSheetVisible] = useState(false);
   const [envelopeOpened, setEnvelopeOpened] = useState(false);
 
-  const envY   = useRef(new Animated.Value(0)).current;
+  const envY = useRef(new Animated.Value(0)).current;
   const envRot = useRef(new Animated.Value(0)).current;
 
   useFocusEffect(useCallback(() => { loadData(); }, []));
@@ -33,13 +33,13 @@ export default function TerraScreen() {
   useEffect(() => {
     Animated.loop(Animated.parallel([
       Animated.sequence([
-        Animated.timing(envY,   { toValue: -10, duration: 1750, useNativeDriver: true }),
-        Animated.timing(envY,   { toValue: 0,   duration: 1750, useNativeDriver: true }),
+        Animated.timing(envY, { toValue: -10, duration: 1750, useNativeDriver: true }),
+        Animated.timing(envY, { toValue: 0, duration: 1750, useNativeDriver: true }),
       ]),
       Animated.sequence([
-        Animated.timing(envRot, { toValue: 1,  duration: 1750, useNativeDriver: true }),
+        Animated.timing(envRot, { toValue: 1, duration: 1750, useNativeDriver: true }),
         Animated.timing(envRot, { toValue: -1, duration: 1750, useNativeDriver: true }),
-        Animated.timing(envRot, { toValue: 0,  duration: 1750, useNativeDriver: true }),
+        Animated.timing(envRot, { toValue: 0, duration: 1750, useNativeDriver: true }),
       ]),
     ])).start();
   }, [envY, envRot]);
@@ -94,7 +94,7 @@ export default function TerraScreen() {
             ✉
           </Animated.Text>
           <Text style={s.heroTitle}>SURPRESA ESPECIAL DE HOJE</Text>
-          <Text style={s.heroSub}>O ORBIT escolheu o momento certo para entregar esta mensagem</Text>
+          <Text style={s.heroSub}>O ZÊNITE escolheu o momento certo para entregar esta mensagem</Text>
           <TouchableOpacity
             style={[s.openBtn, envelopeOpened && s.openBtnDone]}
             onPress={openEnvelope}
@@ -112,7 +112,7 @@ export default function TerraScreen() {
           <Text style={s.queueIcon}>⏱</Text>
           <View style={{ flex: 1 }}>
             <Text style={s.queueCount}>{pendingCount} MENSAGENS AGUARDANDO</Text>
-            <Text style={s.queueSub}>O ORBIT entrega no momento certo · delay respeitado</Text>
+            <Text style={s.queueSub}>O ZÊNITE entrega no momento certo · delay respeitado</Text>
           </View>
         </View>
 
@@ -173,39 +173,39 @@ export default function TerraScreen() {
 }
 
 const s = StyleSheet.create({
-  container:      { flex: 1, backgroundColor: COLORS.background },
-  scroll:         { paddingHorizontal: 20, paddingTop: 56, paddingBottom: 40 },
-  header:         { marginBottom: 20 },
-  headerTitle:    { fontSize: 22, fontWeight: '300', letterSpacing: 5, color: COLORS.textPrimary, textTransform: 'uppercase', marginBottom: 4 },
-  headerSub:      { fontSize: 12, letterSpacing: 2, color: COLORS.textSecondary, textTransform: 'uppercase' },
-  heroCard:       { backgroundColor: 'rgba(232,101,42,0.03)', borderWidth: 1, borderColor: 'rgba(232,101,42,0.2)', borderRadius: 4, padding: 32, alignItems: 'center', marginBottom: 16 },
-  envIcon:        { fontSize: 56, marginBottom: 16 },
-  heroTitle:      { fontSize: 14, letterSpacing: 3, color: COLORS.textPrimary, textTransform: 'uppercase', textAlign: 'center', marginBottom: 8 },
-  heroSub:        { fontSize: 12, color: COLORS.textSecondary, fontWeight: '300', textAlign: 'center', lineHeight: 18, marginBottom: 20 },
-  openBtn:        { borderWidth: 1, borderColor: COLORS.orange, backgroundColor: 'rgba(232,101,42,0.06)', borderRadius: 4, height: 56, paddingHorizontal: 24, alignItems: 'center', justifyContent: 'center' },
-  openBtnDone:    { borderColor: COLORS.teal, backgroundColor: 'rgba(74,158,142,0.06)' },
-  openBtnText:    { fontSize: 11, letterSpacing: 3, color: COLORS.orange, textTransform: 'uppercase' },
-  queueCard:      { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: COLORS.surface, borderWidth: 1, borderColor: COLORS.border, borderRadius: 4, padding: 16, marginBottom: 24 },
-  queueIcon:      { fontSize: 20, color: COLORS.textSecondary },
-  queueCount:     { fontSize: 10, letterSpacing: 3, color: COLORS.textPrimary, textTransform: 'uppercase' },
-  queueSub:       { fontSize: 11, color: COLORS.textSecondary, fontWeight: '300', marginTop: 2 },
-  sectionLabel:   { fontSize: 9, letterSpacing: 4, color: COLORS.textSecondary, textTransform: 'uppercase', marginBottom: 12 },
-  msgCard:        { flexDirection: 'row', gap: 12, backgroundColor: COLORS.surface, borderWidth: 1, borderColor: COLORS.border, borderRadius: 4, padding: 14, marginBottom: 8 },
-  avatar:         { width: 40, height: 40, borderRadius: 4, borderWidth: 1, borderColor: 'rgba(232,101,42,0.3)', backgroundColor: 'rgba(232,101,42,0.06)', alignItems: 'center', justifyContent: 'center' },
-  avatarText:     { fontSize: 18, color: COLORS.orange },
-  msgSender:      { fontSize: 10, letterSpacing: 2, color: COLORS.textPrimary, marginBottom: 4 },
-  msgPreview:     { fontSize: 12, color: COLORS.textSecondary, fontWeight: '300', lineHeight: 18 },
-  msgMeta:        { fontSize: 9, color: COLORS.textSecondary, letterSpacing: 1 },
+  container: { flex: 1, backgroundColor: COLORS.background },
+  scroll: { paddingHorizontal: 20, paddingTop: 56, paddingBottom: 40 },
+  header: { marginBottom: 20 },
+  headerTitle: { fontSize: 22, fontWeight: '300', letterSpacing: 5, color: COLORS.textPrimary, textTransform: 'uppercase', marginBottom: 4 },
+  headerSub: { fontSize: 12, letterSpacing: 2, color: COLORS.textSecondary, textTransform: 'uppercase' },
+  heroCard: { backgroundColor: 'rgba(232,101,42,0.03)', borderWidth: 1, borderColor: 'rgba(232,101,42,0.2)', borderRadius: 4, padding: 32, alignItems: 'center', marginBottom: 16 },
+  envIcon: { fontSize: 56, marginBottom: 16 },
+  heroTitle: { fontSize: 14, letterSpacing: 3, color: COLORS.textPrimary, textTransform: 'uppercase', textAlign: 'center', marginBottom: 8 },
+  heroSub: { fontSize: 12, color: COLORS.textSecondary, fontWeight: '300', textAlign: 'center', lineHeight: 18, marginBottom: 20 },
+  openBtn: { borderWidth: 1, borderColor: COLORS.orange, backgroundColor: 'rgba(232,101,42,0.06)', borderRadius: 4, height: 56, paddingHorizontal: 24, alignItems: 'center', justifyContent: 'center' },
+  openBtnDone: { borderColor: COLORS.teal, backgroundColor: 'rgba(74,158,142,0.06)' },
+  openBtnText: { fontSize: 11, letterSpacing: 3, color: COLORS.orange, textTransform: 'uppercase' },
+  queueCard: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: COLORS.surface, borderWidth: 1, borderColor: COLORS.border, borderRadius: 4, padding: 16, marginBottom: 24 },
+  queueIcon: { fontSize: 20, color: COLORS.textSecondary },
+  queueCount: { fontSize: 10, letterSpacing: 3, color: COLORS.textPrimary, textTransform: 'uppercase' },
+  queueSub: { fontSize: 11, color: COLORS.textSecondary, fontWeight: '300', marginTop: 2 },
+  sectionLabel: { fontSize: 9, letterSpacing: 4, color: COLORS.textSecondary, textTransform: 'uppercase', marginBottom: 12 },
+  msgCard: { flexDirection: 'row', gap: 12, backgroundColor: COLORS.surface, borderWidth: 1, borderColor: COLORS.border, borderRadius: 4, padding: 14, marginBottom: 8 },
+  avatar: { width: 40, height: 40, borderRadius: 4, borderWidth: 1, borderColor: 'rgba(232,101,42,0.3)', backgroundColor: 'rgba(232,101,42,0.06)', alignItems: 'center', justifyContent: 'center' },
+  avatarText: { fontSize: 18, color: COLORS.orange },
+  msgSender: { fontSize: 10, letterSpacing: 2, color: COLORS.textPrimary, marginBottom: 4 },
+  msgPreview: { fontSize: 12, color: COLORS.textSecondary, fontWeight: '300', lineHeight: 18 },
+  msgMeta: { fontSize: 9, color: COLORS.textSecondary, letterSpacing: 1 },
   // Sheet
-  sheetTag:       { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 20 },
-  tagLine:        { flex: 1, height: 1, backgroundColor: COLORS.border },
-  tagText:        { fontSize: 9, letterSpacing: 3, color: COLORS.orange, textTransform: 'uppercase' },
-  sheetSender:    { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 20 },
-  sheetAvatar:    { width: 48, height: 48, borderRadius: 4, borderWidth: 1, borderColor: COLORS.orange, backgroundColor: 'rgba(232,101,42,0.06)', alignItems: 'center', justifyContent: 'center' },
-  sheetAvatarText:{ fontSize: 22, color: COLORS.orange },
-  sheetSenderName:{ fontSize: 12, letterSpacing: 2, color: COLORS.textPrimary, textTransform: 'uppercase' },
-  sheetRelation:  { fontSize: 11, color: COLORS.textSecondary, marginTop: 2 },
-  sheetMsg:       { borderLeftWidth: 2, borderLeftColor: COLORS.orange, paddingLeft: 16, marginBottom: 20 },
-  sheetMsgText:   { fontSize: 14, color: COLORS.textPrimary, fontStyle: 'italic', fontWeight: '300', lineHeight: 22 },
-  sheetNote:      { fontSize: 10, color: 'rgba(232,101,42,0.7)', textAlign: 'center', letterSpacing: 1, marginBottom: 8 },
+  sheetTag: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 20 },
+  tagLine: { flex: 1, height: 1, backgroundColor: COLORS.border },
+  tagText: { fontSize: 9, letterSpacing: 3, color: COLORS.orange, textTransform: 'uppercase' },
+  sheetSender: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 20 },
+  sheetAvatar: { width: 48, height: 48, borderRadius: 4, borderWidth: 1, borderColor: COLORS.orange, backgroundColor: 'rgba(232,101,42,0.06)', alignItems: 'center', justifyContent: 'center' },
+  sheetAvatarText: { fontSize: 22, color: COLORS.orange },
+  sheetSenderName: { fontSize: 12, letterSpacing: 2, color: COLORS.textPrimary, textTransform: 'uppercase' },
+  sheetRelation: { fontSize: 11, color: COLORS.textSecondary, marginTop: 2 },
+  sheetMsg: { borderLeftWidth: 2, borderLeftColor: COLORS.orange, paddingLeft: 16, marginBottom: 20 },
+  sheetMsgText: { fontSize: 14, color: COLORS.textPrimary, fontStyle: 'italic', fontWeight: '300', lineHeight: 22 },
+  sheetNote: { fontSize: 10, color: 'rgba(232,101,42,0.7)', textAlign: 'center', letterSpacing: 1, marginBottom: 8 },
 });
