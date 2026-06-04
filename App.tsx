@@ -4,19 +4,22 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 import { RootStackParamList } from './src/types';
 import { getFlags } from './src/utils/storage';
 import { COLORS } from './src/constants/colors';
+
 import OnboardingScreen from './src/screens/OnboardingScreen';
-import BreathingScreen from './src/screens/BreathingScreen';
+import EstabilizarScreen from './src/screens/EstabilizarScreen';
+import BreathingSessionScreen from './src/screens/BreathingSessionScreen';
+
 import MainTabs from './src/navigation/MainTabs';
-import EstabilizarScreen from './src/navigation/MainTabs';
-import BreathingSessionScreen from './src/navigation/MainTabs';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
-  const [initialRoute, setInitialRoute] = useState<'Onboarding' | 'Main' | null>(null);
+  const [initialRoute, setInitialRoute] =
+    useState<'Onboarding' | 'Main' | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -25,21 +28,53 @@ export default function App() {
     })();
   }, []);
 
-  if (!initialRoute) return <View style={{ flex: 1, backgroundColor: COLORS.background }} />;
+  if (!initialRoute) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: COLORS.background,
+        }}
+      />
+    );
+  }
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <NavigationContainer>
-        <StatusBar style="light" backgroundColor={COLORS.background} />
+        <StatusBar
+          style="light"
+          backgroundColor={COLORS.background}
+        />
+
         <Stack.Navigator
           initialRouteName={initialRoute}
-          screenOptions={{ headerShown: false, cardStyle: { backgroundColor: COLORS.background } }}
+          screenOptions={{
+            headerShown: false,
+            cardStyle: {
+              backgroundColor: COLORS.background,
+            },
+          }}
         >
-          <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-          <Stack.Screen name="Main" component={MainTabs} />
-          <Stack.Screen name="Breathing" component={BreathingScreen} options={{ presentation: 'modal' }} />
-          <Stack.Screen name="Estabilizar" component={EstabilizarScreen} />
-          <Stack.Screen name="BreathingSession" component={BreathingSessionScreen}/>
+          <Stack.Screen
+            name="Onboarding"
+            component={OnboardingScreen}
+          />
+
+          <Stack.Screen
+            name="Main"
+            component={MainTabs}
+          />
+
+          <Stack.Screen
+            name="Estabilizar"
+            component={EstabilizarScreen}
+          />
+
+          <Stack.Screen
+            name="BreathingSession"
+            component={BreathingSessionScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>
