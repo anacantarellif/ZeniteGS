@@ -1,0 +1,28 @@
+import { Message } from '../types';
+
+export const MESSAGES: Message[] = [
+  { id: 1, sender: 'Ana Lima', relation: 'Esposa', type: 'text',
+    content: 'Marcos, hoje o Pedro ganhou o campeonato de natação. Ele ficou me perguntando se você viu do espaço. Eu disse que sim, claro. A gente te ama demais. Volta logo pra gente.', day: 45 },
+  { id: 2, sender: 'Pedro Lima', relation: 'Filho', type: 'video',
+    content: 'Papai! Aprendi a fazer a estrela do mar na aula de natação. Tô treinando pra quando você voltar e a gente for nadar junto. Saudade papai.', day: 44 },
+  { id: 3, sender: 'Carlos Lima', relation: 'Pai', type: 'audio',
+    content: 'Filho, aqui é seu pai. Ontem à noite peguei o telescópio e fiquei tentando te achar lá em cima. Não sei se era você, mas um ponto de luz passou e eu fiz questão de acreditar que sim. Tô orgulhoso demais.', day: 41 },
+  { id: 4, sender: 'Maria Lima', relation: 'Mãe', type: 'text',
+    content: 'Meu filho, fiz o seu prato favorito hoje. Deixei no pote esperando você voltar — brincadeira. Mas a saudade é real. Rezo por você todo dia antes de dormir. Cuida-se.', day: 38 },
+  { id: 5, sender: 'Rafael Costa', relation: 'Melhor amigo', type: 'text',
+    content: 'Cara, a turma toda pergunta de você. A gente fez uma noite de filmes de ficção científica em sua homenagem. Escolhemos só os ruins de propósito pra você se sentir superior. Volta logo que a saudade tá grande.', day: 35 },
+  { id: 6, sender: 'Ana Lima', relation: 'Esposa', type: 'photo',
+    content: 'Conseguimos ver o pôr do sol do mirante hoje. Você veria isso e ia querer fotografar. Fotografei por você. Guarda comigo até você voltar. Te amo.', day: 32 },
+  { id: 7, sender: 'Pedro Lima', relation: 'Filho', type: 'text',
+    content: 'Pai, aprendi a tabuada do 7 hoje. A professora falou que fui o mais rápido da turma. Você vai testar eu quando voltar, tá? Não vou esquecer. Promessa.', day: 29 },
+  { id: 8, sender: 'Carlos Lima', relation: 'Pai', type: 'text',
+    content: 'Filho, hoje choveu aquela chuva de verão que você tanto gosta. A que faz barulho no telhado e cheira a terra molhada. Fiquei sentado na varanda pensando em você. Tem uma Terra muito bonita te esperando.', day: 26 },
+  { id: 9, sender: 'Carla Mendes', relation: 'Irmã', type: 'audio',
+    content: 'Irmão, passei na frente da sua casa hoje e lembrei de quando a gente ficava jogando bola na rua até anoitecer. A gente tem que fazer isso de novo quando você voltar. Com os filhos da gente agora. Vai ser lindo.', day: 22 },
+  { id: 10, sender: 'Rafael Costa', relation: 'Melhor amigo', type: 'text',
+    content: 'Cara, sabia que você foi parar no noticiário? A cidade inteira tá sabendo que tem um herói nosso lá em cima. Minha mãe perguntou o autógrafo. Brincadeira. Só metade.', day: 18 },
+  { id: 11, sender: 'Ana Lima', relation: 'Esposa', type: 'text',
+    content: 'Hoje o Pedro dormiu abraçado com a foto sua. Eu fingi que não vi pra não estragar. A gente tá bem, tá cuidando da casa, tá esperando. Mas faz falta. Você faz falta. Volta inteiro pra gente.', day: 14 },
+  { id: 12, sender: 'Maria Lima', relation: 'Mãe', type: 'text',
+    content: 'Filho, fui na igreja hoje e acendi uma vela por você. O padre disse que Deus está em todo lugar, inclusive no espaço. Então você não está sozinho. A gente está com você, de alguma forma. Saudades.', day: 7 },
+];
