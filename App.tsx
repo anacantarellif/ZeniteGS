@@ -6,7 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { RootStackParamList } from './src/types';
-import { getFlags } from './src/utils/storage';
+import { getFlags, setFlag } from './src/utils/storage';
 import { COLORS } from './src/constants/colors';
 
 import OnboardingScreen from './src/screens/OnboardingScreen';
@@ -23,6 +23,8 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
+      await setFlag('onboardingDone', false);
+
       const flags = await getFlags();
       setInitialRoute(flags.onboardingDone ? 'Main' : 'Onboarding');
     })();

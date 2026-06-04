@@ -15,23 +15,23 @@ const { width } = Dimensions.get('window');
 type Nav = StackNavigationProp<RootStackParamList, 'Onboarding'>;
 
 const ANCHORS: { key: User['anchor']; emoji: string; label: string }[] = [
-  { key: 'family',  emoji: '👨‍👩‍👧', label: 'Família'  },
-  { key: 'nature',  emoji: '🌿',     label: 'Natureza' },
-  { key: 'music',   emoji: '🎵',     label: 'Música'   },
-  { key: 'faith',   emoji: '✦',      label: 'Fé'       },
-  { key: 'memory',  emoji: '◈',      label: 'Memória'  },
+  { key: 'family', emoji: '👨‍👩‍👧', label: 'Família' },
+  { key: 'nature', emoji: '🌿', label: 'Natureza' },
+  { key: 'music', emoji: '🎵', label: 'Música' },
+  { key: 'faith', emoji: '🙏', label: 'Fé' },
+  { key: 'memory', emoji: '🧠', label: 'Memória' },
 ];
 
 export default function OnboardingScreen({ navigation }: { navigation: Nav }) {
   const [phase, setPhase] = useState<'launch' | 'form'>('launch');
   const [countdown, setCountdown] = useState(3);
-  const countAnim  = useRef(new Animated.Value(1)).current;
+  const countAnim = useRef(new Animated.Value(1)).current;
   const missionAnim = useRef(new Animated.Value(0)).current;
 
-  const [name, setName]               = useState('');
-  const [city, setCity]               = useState('');
+  const [name, setName] = useState('');
+  const [city, setCity] = useState('');
   const [missionStart, setMissionStart] = useState(new Date().toISOString().split('T')[0]);
-  const [anchor, setAnchor]           = useState<User['anchor'] | null>(null);
+  const [anchor, setAnchor] = useState<User['anchor'] | null>(null);
   const [supportNetwork, setSupportNetwork] = useState<SupportPerson[]>([
     { id: '1', name: '', relation: '' },
   ]);
@@ -42,7 +42,7 @@ export default function OnboardingScreen({ navigation }: { navigation: Nav }) {
     const tick = () => {
       Animated.sequence([
         Animated.timing(countAnim, { toValue: 1.2, duration: 200, useNativeDriver: true }),
-        Animated.timing(countAnim, { toValue: 0,   duration: 300, useNativeDriver: true }),
+        Animated.timing(countAnim, { toValue: 0, duration: 300, useNativeDriver: true }),
       ]).start(() => {
         count--;
         if (count > 0) {
@@ -189,30 +189,30 @@ export default function OnboardingScreen({ navigation }: { navigation: Nav }) {
 }
 
 const s = StyleSheet.create({
-  launch:     { flex: 1, backgroundColor: COLORS.background, alignItems: 'center', justifyContent: 'center' },
-  countdown:  { fontSize: 80, fontWeight: '300', letterSpacing: 10, color: COLORS.orange },
-  missionText:{ fontSize: 24, fontWeight: '300', letterSpacing: 6, color: COLORS.textPrimary, textTransform: 'uppercase' },
-  container:  { flex: 1, backgroundColor: COLORS.background },
-  scroll:     { paddingHorizontal: 20, paddingTop: 60, paddingBottom: 40 },
+  launch: { flex: 1, backgroundColor: COLORS.background, alignItems: 'center', justifyContent: 'center' },
+  countdown: { fontSize: 80, fontWeight: '300', letterSpacing: 10, color: COLORS.orange },
+  missionText: { fontSize: 24, fontWeight: '300', letterSpacing: 6, color: COLORS.textPrimary, textTransform: 'uppercase' },
+  container: { flex: 1, backgroundColor: COLORS.background },
+  scroll: { paddingHorizontal: 20, paddingTop: 60, paddingBottom: 40 },
   formHeader: { marginBottom: 32 },
-  formTitle:  { fontSize: 28, fontWeight: '300', letterSpacing: 4, color: COLORS.textPrimary, textTransform: 'uppercase', lineHeight: 36 },
-  formSub:    { fontSize: 12, letterSpacing: 3, color: COLORS.textSecondary, textTransform: 'uppercase', marginTop: 8 },
-  field:      { marginBottom: 24 },
+  formTitle: { fontSize: 28, fontWeight: '300', letterSpacing: 4, color: COLORS.textPrimary, textTransform: 'uppercase', lineHeight: 36 },
+  formSub: { fontSize: 12, letterSpacing: 3, color: COLORS.textSecondary, textTransform: 'uppercase', marginTop: 8 },
+  field: { marginBottom: 24 },
   fieldLabel: { fontSize: 10, letterSpacing: 4, color: COLORS.textSecondary, textTransform: 'uppercase', marginBottom: 8 },
-  fieldHint:  { fontSize: 12, color: COLORS.textSecondary, marginBottom: 12, fontWeight: '300' },
+  fieldHint: { fontSize: 12, color: COLORS.textSecondary, marginBottom: 12, fontWeight: '300' },
   input: {
     backgroundColor: COLORS.surface, borderWidth: 1, borderColor: COLORS.border,
     borderRadius: 4, padding: 16, color: COLORS.textPrimary, fontSize: 14, fontWeight: '300',
   },
-  anchorGrid:      { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  anchorCard:      { width: (width - 56) / 3, padding: 16, backgroundColor: COLORS.surface, borderWidth: 1, borderColor: COLORS.border, borderRadius: 4, alignItems: 'center' },
-  anchorCardActive:{ borderColor: COLORS.orange, backgroundColor: 'rgba(232,101,42,0.06)' },
-  anchorEmoji:     { fontSize: 24, marginBottom: 6 },
-  anchorLabel:     { fontSize: 9, letterSpacing: 2, color: COLORS.textSecondary, textTransform: 'uppercase', textAlign: 'center' },
-  supportRow:      { flexDirection: 'row', gap: 8, marginBottom: 8 },
-  addBtn:          { borderWidth: 1, borderColor: COLORS.border, borderRadius: 4, paddingVertical: 14, alignItems: 'center', marginTop: 4 },
-  addBtnText:      { fontSize: 10, letterSpacing: 3, color: COLORS.textSecondary, textTransform: 'uppercase' },
-  startBtn:        { borderWidth: 1, borderColor: COLORS.orange, backgroundColor: 'rgba(232,101,42,0.06)', borderRadius: 4, height: 56, alignItems: 'center', justifyContent: 'center', marginTop: 16 },
-  startBtnDisabled:{ borderColor: COLORS.border, backgroundColor: 'transparent', opacity: 0.4 },
-  startBtnText:    { fontSize: 12, letterSpacing: 4, color: COLORS.orange, textTransform: 'uppercase' },
+  anchorGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  anchorCard: { width: (width - 56) / 3, padding: 16, backgroundColor: COLORS.surface, borderWidth: 1, borderColor: COLORS.border, borderRadius: 4, alignItems: 'center' },
+  anchorCardActive: { borderColor: COLORS.orange, backgroundColor: 'rgba(232,101,42,0.06)' },
+  anchorEmoji: { fontSize: 24, marginBottom: 6 },
+  anchorLabel: { fontSize: 9, letterSpacing: 2, color: COLORS.textSecondary, textTransform: 'uppercase', textAlign: 'center' },
+  supportRow: { flexDirection: 'row', gap: 8, marginBottom: 8 },
+  addBtn: { borderWidth: 1, borderColor: COLORS.border, borderRadius: 4, paddingVertical: 14, alignItems: 'center', marginTop: 4 },
+  addBtnText: { fontSize: 10, letterSpacing: 3, color: COLORS.textSecondary, textTransform: 'uppercase' },
+  startBtn: { borderWidth: 1, borderColor: COLORS.orange, backgroundColor: 'rgba(232,101,42,0.06)', borderRadius: 4, height: 56, alignItems: 'center', justifyContent: 'center', marginTop: 16 },
+  startBtnDisabled: { borderColor: COLORS.border, backgroundColor: 'transparent', opacity: 0.4 },
+  startBtnText: { fontSize: 12, letterSpacing: 4, color: COLORS.orange, textTransform: 'uppercase' },
 });
