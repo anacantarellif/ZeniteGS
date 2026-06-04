@@ -106,59 +106,334 @@ export default function HomeScreen() {
   ];
 
   return (
-    <View style={s.grid}>
-      {modules.map((m, i) => (
-        <TouchableOpacity
-          key={i}
-          style={s.moduleCard}
-          onPress={() => {
-            if ('action' in m && m.action === 'estabilizar') {
-              rootNav.navigate('Estabilizar');
-              return;
-            }
+  <View style={s.container}>
+    <StarField />
+    <ScanLine />
+    <MarsGlow />
 
-            if ('tab' in m && m.tab) {
-              navigation.navigate(m.tab);
-            }
-          }}
-          accessibilityRole="button"
-          accessibilityLabel={m.title}
+    <ScrollView
+      contentContainerStyle={s.scroll}
+      showsVerticalScrollIndicator={false}
+    >
+      {/* Header */}
+      <View style={s.header}>
+        <View style={s.badge}>
+          <Text style={s.badgeText}>
+            ISS · MISSÃO ATIVA
+          </Text>
+        </View>
+
+        <TouchableOpacity
+          style={s.bellBtn}
+          onPress={() => setNotifVisible(true)}
         >
-          <View style={{ marginBottom: 12 }}>
-            <m.icon
-              size={22}
-              color={COLORS.orange}
-              strokeWidth={1.5}
+          <Svg width={22} height={22} viewBox="0 0 22 22">
+            <Circle
+              cx={11}
+              cy={5}
+              r={7}
+              fill="none"
+              stroke={COLORS.textMedium}
+              strokeWidth={1.2}
             />
+            <Line
+              x1={8}
+              y1={19}
+              x2={14}
+              y2={19}
+              stroke={COLORS.textMedium}
+              strokeWidth={1.5}
+              strokeLinecap="round"
+            />
+          </Svg>
+
+          <Animated.View
+            style={[
+              s.pip,
+              {
+                transform: [{ scale: pipScale }],
+                opacity: pipOpacity,
+              },
+            ]}
+          />
+        </TouchableOpacity>
+      </View>
+
+      {/* Órbita */}
+      <View style={s.orbitSection}>
+        <OrbitAnimation />
+        <Text style={s.orbitLabel}>
+          408 KM · 27.600 KM/H
+        </Text>
+      </View>
+
+      {/* Saudação */}
+      <View style={s.greetingSection}>
+        <Text style={s.astronautLabel}>
+          ASTRONAUTA · {user?.name?.toUpperCase() ?? '---'}
+        </Text>
+
+        <Text style={s.greetingTitle}>
+          {greeting()}
+          {'\n'}
+          COMO ESTÁ SUA{' '}
+          <Text style={{ color: COLORS.orange }}>
+            ÓRBITA
+          </Text>{' '}
+          HOJE?
+        </Text>
+
+        <View style={s.missionPill}>
+          <Animated.View
+            style={[
+              s.missionDot,
+              { opacity: dotAnim },
+            ]}
+          />
+
+          <Text style={s.missionPillText}>
+            DIA {missionDay} DE MISSÃO
+          </Text>
+        </View>
+      </View>
+
+      {/* Checkin */}
+      {!hasCheckinToday ? (
+        <TouchableOpacity
+          style={s.checkinCard}
+          onPress={() =>
+            navigation.navigate('Checkin')
+          }
+        >
+          <Svg width={20} height={20} viewBox="0 0 20 20">
+            <Circle
+              cx={10}
+              cy={10}
+              r={8}
+              fill="none"
+              stroke={COLORS.orange}
+              strokeWidth={1.2}
+            />
+            <Circle
+              cx={10}
+              cy={10}
+              r={3}
+              fill={COLORS.orange}
+            />
+          </Svg>
+
+          <View style={{ flex: 1 }}>
+            <Text style={s.checkinTitle}>
+              CHECK-IN PENDENTE
+            </Text>
+
+            <Text style={s.checkinSub}>
+              Registre seu sinal de vida — Dia{' '}
+              {missionDay}
+            </Text>
           </View>
 
-          {!!m.badge && (
-            <View
-              style={[
-                s.moduleBadge,
-                {
-                  backgroundColor:
-                    m.badgeColor ?? COLORS.orange,
-                },
-              ]}
-            >
-              <Text style={s.moduleBadgeText}>
-                {m.badge}
-              </Text>
-            </View>
-          )}
-
-          <Text style={s.moduleTitle}>
-            {m.title}
-          </Text>
-
-          <Text style={s.moduleSub}>
-            {m.sub}
+          <Text
+            style={{
+              fontSize: 20,
+              color: COLORS.orange,
+            }}
+          >
+            ›
           </Text>
         </TouchableOpacity>
-      ))}
-    </View>
-  );
+      ) : (
+        <View
+          style={[
+            s.checkinCard,
+            s.checkinDone,
+          ]}
+        >
+          <Svg width={20} height={20} viewBox="0 0 20 20">
+            <Circle
+              cx={10}
+              cy={10}
+              r={8}
+              fill="none"
+              stroke={COLORS.teal}
+              strokeWidth={1.2}
+            />
+
+            <Line
+              x1={6}
+              y1={10}
+              x2={9}
+              y2={13}
+              stroke={COLORS.teal}
+              strokeWidth={1.5}
+            />
+
+            <Line
+              x1={9}
+              y1={13}
+              x2={14}
+              y2={7}
+              stroke={COLORS.teal}
+              strokeWidth={1.5}
+            />
+          </Svg>
+
+          <View style={{ flex: 1 }}>
+            <Text
+              style={[
+                s.checkinTitle,
+                { color: COLORS.teal },
+              ]}
+            >
+              SINAL REGISTRADO
+            </Text>
+
+            <Text style={s.checkinSub}>
+              Check-in concluído hoje · Dia{' '}
+              {missionDay}
+            </Text>
+          </View>
+        </View>
+      )}
+
+      {/* Grid */}
+      <View style={s.grid}>
+        {modules.map((m, i) => (
+          <TouchableOpacity
+            key={i}
+            style={s.moduleCard}
+            onPress={() => {
+              if (
+                'action' in m &&
+                m.action === 'estabilizar'
+              ) {
+                rootNav.navigate('Estabilizar');
+                return;
+              }
+
+              if ('tab' in m && m.tab) {
+                navigation.navigate(m.tab);
+              }
+            }}
+          >
+            <View style={{ marginBottom: 12 }}>
+              <m.icon
+                size={22}
+                color={COLORS.orange}
+                strokeWidth={1.5}
+              />
+            </View>
+
+            {!!m.badge && (
+              <View
+                style={[
+                  s.moduleBadge,
+                  {
+                    backgroundColor:
+                      m.badgeColor ??
+                      COLORS.orange,
+                  },
+                ]}
+              >
+                <Text style={s.moduleBadgeText}>
+                  {m.badge}
+                </Text>
+              </View>
+            )}
+
+            <Text style={s.moduleTitle}>
+              {m.title}
+            </Text>
+
+            <Text style={s.moduleSub}>
+              {m.sub}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* Streak */}
+      <View style={s.streakCard}>
+        <View style={{ alignItems: 'center' }}>
+          <Text style={s.streakNum}>
+            {streak}
+          </Text>
+
+          <Text style={s.streakLabel}>
+            dias consecutivos
+          </Text>
+        </View>
+
+        <View style={s.streakDots}>
+          {weekDays.map((d, i) => (
+            <View
+              key={i}
+              style={[
+                s.streakDot,
+                d.hasCheckin &&
+                  s.streakDotFilled,
+                d.date ===
+                  new Date()
+                    .toISOString()
+                    .split('T')[0] &&
+                  s.streakDotToday,
+              ]}
+            />
+          ))}
+        </View>
+      </View>
+
+      {/* Hora Terra */}
+      <View style={s.earthCard}>
+        <View style={{ flex: 1 }}>
+          <Text style={s.earthLabel}>
+            HORA NA CIDADE NATAL
+          </Text>
+
+          <Text style={s.earthCity}>
+            {user?.city ?? '---'}
+          </Text>
+        </View>
+
+        <Text style={s.earthTime}>
+          {earthTime}
+        </Text>
+      </View>
+    </ScrollView>
+
+    <Modal
+      visible={notifVisible}
+      transparent
+      animationType="slide"
+      onRequestClose={() =>
+        setNotifVisible(false)
+      }
+    >
+      <TouchableOpacity
+        style={s.backdrop}
+        onPress={() =>
+          setNotifVisible(false)
+        }
+      >
+        <View style={s.notifSheet}>
+          <View style={s.notifHandle} />
+
+          <Text style={s.notifTitle}>
+            ALERTAS DA MISSÃO
+          </Text>
+
+          <Text
+            style={{
+              color: COLORS.textMedium,
+            }}
+          >
+            Novo sinal da Terra disponível.
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </Modal>
+  </View>
+);
 }
 
 const s = StyleSheet.create({
