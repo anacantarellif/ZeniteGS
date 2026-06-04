@@ -103,6 +103,17 @@ export default function OnboardingScreen({ navigation }: { navigation: Nav }) {
       <ScanLine />
       <ScrollView contentContainerStyle={s.scroll} showsVerticalScrollIndicator={false}>
 
+        {/* Logo */}
+        <View style={s.logoContainer}>
+          <Text style={s.logoStar}>✦</Text>
+
+          <Text style={s.logoTitle}>ZÊNITE</Text>
+
+          <Text style={s.logoSubtitle}>
+            Saúde Mental para Astronautas
+          </Text>
+        </View>
+
         <View style={s.formHeader}>
           <Text style={s.formTitle}>CONFIGURAÇÃO{'\n'}DE MISSÃO</Text>
           <Text style={s.formSub}>Identificação do astronauta</Text>
@@ -189,6 +200,32 @@ export default function OnboardingScreen({ navigation }: { navigation: Nav }) {
 }
 
 const s = StyleSheet.create({
+  logoContainer: {
+    alignItems: 'center',
+    marginBottom: 40,
+  },
+
+  logoStar: {
+    fontSize: 28,
+    color: COLORS.orange,
+    marginBottom: 8,
+  },
+
+  logoTitle: {
+    fontSize: 32,
+    fontWeight: '300',
+    letterSpacing: 8,
+    color: COLORS.textPrimary,
+    textTransform: 'uppercase',
+  },
+
+  logoSubtitle: {
+    marginTop: 6,
+    fontSize: 11,
+    letterSpacing: 2,
+    color: COLORS.textSecondary,
+    textTransform: 'uppercase',
+  },
   launch: { flex: 1, backgroundColor: COLORS.background, alignItems: 'center', justifyContent: 'center' },
   countdown: { fontSize: 80, fontWeight: '300', letterSpacing: 10, color: COLORS.orange },
   missionText: { fontSize: 24, fontWeight: '300', letterSpacing: 6, color: COLORS.textPrimary, textTransform: 'uppercase' },
