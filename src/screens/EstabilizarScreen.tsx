@@ -20,7 +20,7 @@ const techniques = [
     id: 'pre-sleep',
     category: 'PRÉ-SONO',
     title: 'Pré-sono · 4-7-8',
-    description: 'Ritmo circadiano. 12 minutos.',
+    description: 'Ritmo circadiano.',
     duration: '12m',
     icon: Moon,
   },
@@ -36,7 +36,7 @@ const techniques = [
     id: 'crisis',
     category: 'CRISE',
     title: 'Estabilização aguda',
-    description: 'Box breathing 4-4-4-4 · 2 minutos.',
+    description: 'Box breathing 4-4-4-4',
     duration: '2m',
     icon: Activity,
   },
@@ -68,7 +68,7 @@ export default function EstabilizarScreen() {
         </Text>
 
         <Text style={styles.sectionLabel}>
-          ESTABILIZAR{'\n'}ÓRBITA
+          ESTABILIZAR ÓRBITA 
         </Text>
 
         <Text style={styles.orangeLabel}>
@@ -76,7 +76,7 @@ export default function EstabilizarScreen() {
         </Text>
 
         <Text style={styles.title}>
-          ESCOLHA UM{'\n'}CONTEXTO.
+          ESCOLHA UM CONTEXTO.
         </Text>
 
         <Text style={styles.subtitle}>
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   },
 
   sectionLabel: {
-    fontSize: 18,
+    fontSize: 22,
     letterSpacing: 6,
     color: COLORS.textPrimary,
     textTransform: 'uppercase',
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   },
 
   orangeLabel: {
-    fontSize: 13,
+    fontSize: 12,
     letterSpacing: 5,
     color: COLORS.orange,
     textTransform: 'uppercase',
@@ -180,15 +180,15 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 52,
-    lineHeight: 58,
+    fontSize: 16,
+    lineHeight: 20,
     color: COLORS.textPrimary,
-    fontWeight: '200',
+    fontWeight: '600',
     marginBottom: 20,
   },
 
   subtitle: {
-    fontSize: 18,
+    fontSize: 12,
     color: COLORS.textSecondary,
     fontWeight: '300',
     marginBottom: 40,
@@ -238,21 +238,21 @@ const styles = StyleSheet.create({
   category: {
     color: COLORS.orange,
     letterSpacing: 4,
-    fontSize: 11,
+    fontSize: 8,
     marginBottom: 8,
   },
 
   cardTitle: {
     color: COLORS.textPrimary,
-    fontSize: 28,
-    fontWeight: '300',
+    fontSize: 14,
+    fontWeight: '400',
     marginBottom: 4,
   },
 
   description: {
     color: COLORS.textSecondary,
-    fontSize: 16,
-    lineHeight: 24,
+    fontSize: 12,
+    lineHeight: 16,
   },
 
   rightSide: {
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
 
   duration: {
     color: COLORS.textPrimary,
-    fontSize: 20,
+    fontSize: 12,
     fontFamily: 'monospace',
   },
 });
