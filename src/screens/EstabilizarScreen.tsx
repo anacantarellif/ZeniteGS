@@ -68,7 +68,7 @@ export default function EstabilizarScreen() {
         </Text>
 
         <Text style={styles.sectionLabel}>
-          ESTABILIZAR ÓRBITA 
+          ESTABILIZAR
         </Text>
 
         <Text style={styles.orangeLabel}>

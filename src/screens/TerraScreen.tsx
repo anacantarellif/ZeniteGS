@@ -164,7 +164,7 @@ export default function TerraScreen() {
             <View style={s.sheetMsg}>
               <Text style={s.sheetMsgText}>{selected.content}</Text>
             </View>
-            <Text style={s.sheetNote}>▲ O ORBIT entregou esta mensagem no momento certo ▲</Text>
+            <Text style={s.sheetNote}>▲ O ZÊNITE entregou esta mensagem no momento certo ▲</Text>
           </ScrollView>
         )}
       </BottomSheet>
